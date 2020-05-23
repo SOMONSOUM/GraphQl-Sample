@@ -1,14 +1,20 @@
 import { ContextType } from "../../lib/ContextType"
 
-const postList = async (__: any, {}: any, ctx: ContextType) => {
+const postList = async (__: any, { }: any, ctx: ContextType) => {
     const knex = await ctx.knex;
-    const posts = knex('posts');
+    const posts = await knex('posts').orderBy('id', 'desc');
 
-    return posts;
+    return posts.map(x => {
+        return {
+            ...x,
+            title: x.title,
+            content: x.content
+        }
+    });
 
 }
 
-const createPost = async (__: any, {data}: any, ctx: ContextType) => {
+const createPost = async (__: any, { data }: any, ctx: ContextType) => {
     const knex = await ctx.knex;
     await knex('posts').insert({
         title: data.title,
@@ -19,14 +25,14 @@ const createPost = async (__: any, {data}: any, ctx: ContextType) => {
 
 }
 
-const post = async (__: any, {id}: any, ctx: ContextType) => {
+const post = async (__: any, { id }: any, ctx: ContextType) => {
     const knex = await ctx.knex;
     const post = knex('posts').where('id', "=", id).first()
 
     return post
 }
 
-const updatePost = async (__: any, {id, data}: any, ctx: ContextType) => {
+const updatePost = async (__: any, { id, data }: any, ctx: ContextType) => {
     const knex = await ctx.knex;
     await knex('posts').update({
         title: data.title,
@@ -36,7 +42,7 @@ const updatePost = async (__: any, {id, data}: any, ctx: ContextType) => {
     return true
 }
 
-const deletePost = async (__: any, {id}: any, ctx: ContextType) => {
+const deletePost = async (__: any, { id }: any, ctx: ContextType) => {
     const knex = await ctx.knex;
     await knex('posts').delete().where('id', "=", id)
 

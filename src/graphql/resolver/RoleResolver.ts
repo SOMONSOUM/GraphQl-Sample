@@ -1,6 +1,6 @@
 import { ContextType } from "../../lib/ContextType"
 
-const roleList = async (__: any, {}: any, ctx: ContextType) => {
+const roleList = async (__: any, { }: any, ctx: ContextType) => {
   const knex = await ctx.knex;
   const items = await knex('roles').orderBy('id', 'desc');
   return items.map(x => {
