@@ -1,0 +1,36 @@
+type Query {
+  userList: [User],
+  me: User
+}
+
+type Mutation {
+  createUser(data: UserInput): Boolean
+  loginUser(username: String!, password: String!): String
+  changePassword(oldPassword: String!, newPassword: String!): Boolean,
+  updateUser(ID: Int!, data: UserUpdate): Boolean
+}
+
+type User {
+  displayName: String,
+  phoneNumber: String,
+  picture: String,
+  createdAt: String,
+  role: Role
+}
+
+input UserInput {
+  displayName: String,
+  phoneNumber: String,
+  picture: String,
+  username: String,
+  password: String,
+  roleID: Int
+}
+
+input UserUpdate {
+  displayName: String,
+  phoneNumber: String,
+  picture: String,
+  username: String,
+  roleID: Int
+}

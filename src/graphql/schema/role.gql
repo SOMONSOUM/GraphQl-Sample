@@ -1,0 +1,12 @@
+extend type Query {
+  roleList: [Role]
+}
+
+extend type Mutation {
+  createRole(role: String!): Boolean
+}
+
+type Role{
+  id: Int,
+  roleName: String
+}
