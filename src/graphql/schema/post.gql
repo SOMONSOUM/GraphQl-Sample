@@ -1,20 +1,20 @@
-extend type Query { 
-    postList: [Posts],
-    post(id: Int!): Posts
- }
+extend type Query {
+  postList: [Posts]
+  post(id: Int!): Posts
+}
 
-extend type Mutation{
-    createPost(data: PostInput): Boolean,
-    updatePost(id: Int!, data: PostInput): Boolean,
-    deletePost(id: Int!): Boolean
+extend type Mutation {
+  createPost(data: PostInput): Boolean
+  updatePost(id: Int!, data: PostInput): Boolean
+  deletePost(id: Int!): Boolean
 }
 
 type Posts {
-     title: String,
-     content: String
- }
+  title: String
+  content: String
+}
 
-input PostInput{
-    title: String,
-    content: String
+input PostInput {
+  title: String
+  content: String
 }

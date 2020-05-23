@@ -22,5 +22,8 @@
     "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "build": "tsc && babel src/graphql/schema -d build/src/graphql/schema --copy-files",
     "start": "tsc && node ./build/src/index.js"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }
