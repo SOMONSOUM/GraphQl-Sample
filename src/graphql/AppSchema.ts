@@ -1,3 +1,4 @@
+import { CategoryResolver } from './resolver/CategoryResolver';
 import { PostResolver } from './resolver/PostResolver';
 import { SchemeLoader } from "./SchemaLoader";
 import { RoleResolver } from "./resolver/RoleResolver";
@@ -8,5 +9,6 @@ export const typeDefs = SchemeLoader();
 export const resolvers = [
   RoleResolver,
   UserResolver,
-  PostResolver
+  PostResolver,
+  CategoryResolver
 ]

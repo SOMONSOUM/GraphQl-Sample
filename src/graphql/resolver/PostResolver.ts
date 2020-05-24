@@ -7,7 +7,9 @@ const postList = async (__: any, { }: any, ctx: ContextType) => {
     return {
       ...x,
       title: x.title,
-      content: x.content
+      content: x.content,
+      categoryId: x.category_id,
+      userId: x.user_id
     }
   });
 
@@ -15,12 +17,14 @@ const postList = async (__: any, { }: any, ctx: ContextType) => {
 
 const createPost = async (__: any, { data }: any, ctx: ContextType) => {
   const knex = await ctx.knex;
+  const userId = (await ctx.auth.getUser()).id;
   await knex('posts').insert({
     title: data.title,
-    content: data.content
+    content: data.content,
+    category_id: data.category_id,
+    user_id: Number(userId)
   })
   return true
-
 }
 
 const post = async (__: any, { id }: any, ctx: ContextType) => {
@@ -31,9 +35,12 @@ const post = async (__: any, { id }: any, ctx: ContextType) => {
 
 const updatePost = async (__: any, { id, data }: any, ctx: ContextType) => {
   const knex = await ctx.knex;
+  const userId = (await ctx.auth.getUser()).id;
   await knex('posts').update({
     title: data.title,
-    content: data.content
+    content: data.content,
+    category_id: data.category_id,
+    user_id: Number(userId)
   }).where('id', "=", id)
   return true
 }

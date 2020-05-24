@@ -1,0 +1,17 @@
+extend type Query {
+  categoryList: [Categories]
+}
+
+extend type Mutation {
+  createCategory(data: CategoryInput): Boolean
+}
+
+type Categories {
+  name: String!
+  user_id: Int
+}
+
+input CategoryInput {
+  name: String!
+  user_id: Int
+}
