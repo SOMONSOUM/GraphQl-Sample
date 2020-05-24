@@ -3,15 +3,21 @@ import { ContextType } from "../../lib/ContextType"
 const postList = async (__: any, { }: any, ctx: ContextType) => {
   const knex = await ctx.knex;
   const posts = await knex('posts').orderBy('id', 'desc');
-  return posts.map(x => {
-    return {
+  const categories = await knex('categories').whereIn('id', posts.map(x => x.category_id));
+  const items: any[] = [];
+
+  posts.map(x => {
+    const category = categories.filter(y => y.id === x.category_id)
+    items.push({
       ...x,
       title: x.title,
       content: x.content,
-      categoryId: x.category_id,
+      categories: category,
       userId: x.user_id
-    }
-  });
+    })
+  })
+
+  return items;
 
 }
 

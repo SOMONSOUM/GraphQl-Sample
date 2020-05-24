@@ -13,12 +13,12 @@ type Posts {
   title: String
   content: String
   category_id: Int
+  categories: [Categories]
   user_id: Int
 }
 
 input PostInput {
   title: String
-  content: String
   category_id: Int
   user_id: Int
 }
