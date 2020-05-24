@@ -9,8 +9,7 @@ const userList = async (_: any, { }: any, ctx: ContextType) => {
   const knex = await ctx.knex;
   const items = await knex('users')
                 .innerJoin('user_role', 'users.id', 'user_role.user_id')
-                .innerJoin('roles', 'user_role.role_id', 'roles.id')
-                .orderBy('created_at', 'desc');
+                .innerJoin('roles', 'user_role.role_id', 'roles.id');
   
   return items.map(x => {
     return {

@@ -6,7 +6,7 @@ extend type Mutation {
   createRole(role: String!): Boolean
 }
 
-type Role{
-  id: Int,
+type Role {
+  id: Int
   roleName: String
 }
